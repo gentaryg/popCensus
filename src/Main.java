@@ -26,15 +26,16 @@ public class Main {
         System.out.println(infant);
         Stream<Person> recruitStream = persons.stream();
         Collection<String> recruit = recruitStream
-                .filter(person ->  person.getAge() > 18 )
-                .filter(person -> person.getAge() < 27 )
+                .filter(person -> person.getSex() == Sex.MAN)
+                .filter(person -> person.getAge() > 18)
+                .filter(person -> person.getAge() < 27)
                 .map(Person::getFamily)
                 .collect(Collectors.toList());
         System.out.println(recruit);
         Stream<Person> workableStream = persons.stream();
         Collection<String> workable = workableStream
                 .filter(person -> person.getEducation() == Education.HIGHER)
-                .filter(person ->  person.getAge() > 18 )
+                .filter(person -> person.getAge() > 18)
                 .filter(person -> person.getSex() == Sex.MAN ? person.getAge() < 65 : person.getAge() < 60)
                 .sorted(Comparator.comparing(Person::getFamily))
                 .map(Person::getFamily)
